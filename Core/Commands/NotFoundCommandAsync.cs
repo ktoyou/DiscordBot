@@ -14,4 +14,6 @@ public class NotFoundCommandAsync : ICommandHandler
     
     public async Task HandleAsync(SocketMessage message) => 
         await message.Channel.SendMessageAsync($"Команда {_command} не найдена.");
+
+    public string GetTextCommand() => string.Empty;
 }

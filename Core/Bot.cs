@@ -1,23 +1,26 @@
 using Discord;
 using Discord.WebSocket;
+using DiscordBot.Core.ConfigResults;
 using DiscordBot.Core.Intrerfaces;
+using DiscordBot.Db;
+using DiscordBot.Model.Repository;
 
 namespace DiscordBot.Core;
 
 public class Bot : IBot
 {
-    private readonly string _token;
+    private readonly DiscordBotConfig _config;
 
     private readonly DiscordSocketClient _client;
 
-    public Bot(string token)
+    public Bot(DiscordBotConfig config)
     {
-        _token = token;
+        _config = config;
         _client = new DiscordSocketClient(new DiscordSocketConfig()
         {
             GatewayIntents = GatewayIntents.AllUnprivileged | GatewayIntents.MessageContent
         });
-        _client.LoginAsync(TokenType.Bot, token).Wait();
+        _client.LoginAsync(TokenType.Bot, config.Token).Wait();
         _client.MessageReceived += ClientOnMessageReceived;
     }
 
@@ -38,6 +41,6 @@ public class Bot : IBot
 
     public async Task StopAsync()
     {
-        throw new NotImplementedException();
+        await _client.StopAsync();
     }
 }

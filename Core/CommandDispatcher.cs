@@ -14,6 +14,10 @@ public class CommandDispatcher : ICommandDispatcher
         {
             "gpt",
             new GptCommandAsync((new GptConfigLoader().Load("gpt.json") as GptConfig).ApiKey)
+        },
+        {
+            "register",
+            new RegisterUserCommandAsync()
         }
     };
 

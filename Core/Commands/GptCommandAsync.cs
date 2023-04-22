@@ -19,4 +19,6 @@ public class GptCommandAsync : ICommandHandler
         var completionResult = await _openAiApi.Completions.CreateCompletionAsync(prompt[1], null, 2000);
         await message.Channel.SendMessageAsync(completionResult.Completions[0].Text, false, null, null, null, message.Reference);
     }
+
+    public string GetTextCommand() => "gpt";
 }

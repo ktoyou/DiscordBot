@@ -3,9 +3,10 @@ using DiscordBot.Core.ConfigLoaders;
 using DiscordBot.Core.ConfigResults;
 
 var discordBotConfigLoader = new DiscordBotConfigLoader();
-var config = discordBotConfigLoader.Load("bot.json") as DiscordBotConfig;
+var discordBotConfig = discordBotConfigLoader.Load("bot.json") as DiscordBotConfig;
+if (discordBotConfig == null) throw new Exception("Failed to load bot.json");
 
-var bot = new Bot(config.Token);
+var bot = new Bot(discordBotConfig);
 await bot.RunAsync();
 
 Console.ReadKey();
