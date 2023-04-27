@@ -2,8 +2,6 @@ using Discord;
 using Discord.WebSocket;
 using DiscordBot.Core.ConfigResults;
 using DiscordBot.Core.Intrerfaces;
-using DiscordBot.Db;
-using DiscordBot.Model.Repository;
 using Microsoft.Extensions.Logging;
 
 namespace DiscordBot.Core;
@@ -16,10 +14,13 @@ public class Bot : IBot
 
     private readonly ILogger<Bot> _logger;
 
-    public Bot(DiscordBotConfig config, ILogger<Bot> logger)
+    private readonly ICommandDispatcher _commandDispatcher;
+
+    public Bot(DiscordBotConfig config, ILogger<Bot> logger, ICommandDispatcher commandDispatcher)
     {
         _config = config;
         _logger = logger;
+        _commandDispatcher = commandDispatcher;
         
         _logger.Log(LogLevel.Information, "Initializing DiscordSocketClient");
         _client = new DiscordSocketClient(new DiscordSocketConfig()
@@ -36,7 +37,7 @@ public class Bot : IBot
     {
         if (arg.Content.StartsWith("///code"))
         {
-            _logger.Log(LogLevel.Information, "Message from discord server");
+            _logger.Log(LogLevel.Information, $"Message from {arg.Channel.Name} discord server");
             await TryDispatchCommand(arg);
         }
     }
@@ -45,10 +46,8 @@ public class Bot : IBot
     {
         try
         {
-            var splitCommand = arg.Content.Split("///code ");
-            _logger.Log(LogLevel.Information, $"Trying dispatch command {splitCommand[1]}");
-            var commandDispatcher = new CommandDispatcher(arg);
-            await commandDispatcher.DispatchCommandAsync(splitCommand[1]);
+            _logger.Log(LogLevel.Information, $"Trying dispatch command");
+            await _commandDispatcher.DispatchCommandAsync(arg);
         }
         catch (Exception e)
         {

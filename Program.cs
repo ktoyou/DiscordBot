@@ -12,7 +12,7 @@ var loggerFactory = LoggerFactory.Create(builder =>
     builder.AddConsole();
 });
 
-var bot = new Bot(discordBotConfig, loggerFactory.CreateLogger<Bot>());
+var bot = new Bot(discordBotConfig, loggerFactory.CreateLogger<Bot>(), new CommandDispatcher());
 await bot.RunAsync();
 
 Console.ReadKey();

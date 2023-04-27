@@ -9,37 +9,35 @@ namespace DiscordBot.Core;
 
 public class CommandDispatcher : ICommandDispatcher
 {
-    private static readonly Dictionary<string, ICommandHandler> _commands = new Dictionary<string, ICommandHandler>()
-    {
-        {
-            "gpt",
-            new GptCommandAsync((new GptConfigLoader().Load("gpt.json") as GptConfig).ApiKey)
-        },
-        {
-            "register",
-            new RegisterUserCommandAsync()
-        }
-    };
+    private readonly Dictionary<string, ICommandHandler> _commands;
 
-    private readonly SocketMessage _socketMessage;
-
-    public CommandDispatcher(SocketMessage message)
+    public CommandDispatcher()
     {
-        _socketMessage = message;
+        _commands = new Dictionary<string, ICommandHandler>()
+        {
+            {
+                "gpt",
+                new GptCommandAsync((new GptConfigLoader().Load("gpt.json") as GptConfig).ApiKey)
+            },
+            {
+                "register",
+                new RegisterUserCommandAsync()
+            }
+        };
     }
 
-    public async Task DispatchCommandAsync(string command)
+    public async Task DispatchCommandAsync(SocketMessage socketMessage)
     {
-        var splitInput = command.Split(' ');
+        var splitInput = socketMessage.Content.Split(' ');
         var commandName = splitInput[0];
 
         if (!_commands.ContainsKey(commandName))
         {
             var error = new NotFoundCommandAsync(commandName);
-            await error.HandleAsync(_socketMessage);
+            await error.HandleAsync(socketMessage);
             return;
         }
         
-        await _commands[commandName].HandleAsync(_socketMessage);
+        await _commands[commandName].HandleAsync(socketMessage);
     }
 }

@@ -10,7 +10,7 @@ namespace DiscordBot.Core;
 
 public class ServicesContainer
 {
-    public static IServiceProvider Provider { get; set; }
+    public static IServiceProvider Provider { get; }
 
     static ServicesContainer()
     {
