@@ -29,7 +29,7 @@ public class CommandDispatcher : ICommandDispatcher
     public async Task DispatchCommandAsync(SocketMessage socketMessage)
     {
         var splitInput = socketMessage.Content.Split(' ');
-        var commandName = splitInput[0];
+        var commandName = splitInput[1];
 
         if (!_commands.ContainsKey(commandName))
         {
