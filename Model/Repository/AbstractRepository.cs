@@ -21,14 +21,4 @@ public abstract class AbstractRepository<T> : IRepository<T>
     public abstract Task RemoveAsync(T item);
 
     public abstract Task EditAsync(T item);
-
-    protected abstract Task<T> TryGetByIdAsync(int id);
-    
-    protected abstract Task<IEnumerable<T>> TryGetAllAsync();
-
-    protected abstract Task TryAddAsync(T item);
-
-    protected abstract Task TryRemoveAsync(T item);
-
-    protected abstract Task TryEditAsync(T item);
 }
