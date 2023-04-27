@@ -22,6 +22,10 @@ public class CommandDispatcher : ICommandDispatcher
             {
                 "register",
                 new RegisterUserCommandAsync()
+            },
+            {
+                "help",
+                new HelpCommandAsync()
             }
         };
     }
