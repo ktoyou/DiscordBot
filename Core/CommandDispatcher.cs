@@ -13,11 +13,12 @@ public class CommandDispatcher : ICommandDispatcher
 
     public CommandDispatcher()
     {
+        var openAiConfig = new GptConfigLoader().Load("gpt.json") as GptConfig;
         _commands = new Dictionary<string, ICommandHandler>()
         {
             {
                 "gpt",
-                new GptCommandAsync((new GptConfigLoader().Load("gpt.json") as GptConfig).ApiKey)
+                new GptCommandAsync(openAiConfig.ApiKey)
             },
             {
                 "register",
@@ -26,6 +27,10 @@ public class CommandDispatcher : ICommandDispatcher
             {
                 "help",
                 new HelpCommandAsync()
+            },
+            {
+                "image",
+                new GenerateImageCommandAsync(openAiConfig.ApiKey)
             }
         };
     }
