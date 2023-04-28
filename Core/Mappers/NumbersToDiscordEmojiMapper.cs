@@ -10,6 +10,7 @@ public class NumbersToDiscordEmojiMapper
     {
         _numbersAssotiationWithDiscordEmoji = new Dictionary<int, string>()
         {
+            { 0, ":zero: "},
             { 1, ":one:" },
             { 2, ":two:" },
             { 3, ":three:" },
@@ -29,7 +30,7 @@ public class NumbersToDiscordEmojiMapper
         
         for (var i = 0; i < stringNumber.Length; i++)
         {
-            var findEmoji = _numbersAssotiationWithDiscordEmoji.First(e => e.Key == number);
+            var findEmoji = _numbersAssotiationWithDiscordEmoji.First(e => e.Key == stringNumber[i] - '0');
             output.Append(findEmoji.Value);
         }
         

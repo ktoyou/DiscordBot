@@ -21,7 +21,7 @@ serviceContainer
     .AddSingleton(discordBotConfig)
     .AddSingleton(sqliteConfig)
     .AddSingleton(openAiConfig)
-    .AddDbContext<SqliteApplicationContext>()
+    .AddTransient<SqliteApplicationContext>()
     .AddTransient<UsersRepository>()
     .AddLogging(builder => builder.AddConsole())
     .AddSingleton(e => e.GetService<IServiceProvider>())
